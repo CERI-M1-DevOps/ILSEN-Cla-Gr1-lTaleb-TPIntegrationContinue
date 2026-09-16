@@ -1,0 +1,16 @@
+name: Bonjour
+
+on: [push] # Se déclenche à chaque push sur le dépôt
+
+jobs:
+  Salutations: # Nom du job
+    name: Salutations
+    runs-on: ubuntu-latest # Machine virtuelle Ubuntu
+    steps:
+      - name: Hello # Première tâche
+        env:
+          personneASaluer: 'Mon voisin Totoro'
+        run: echo "Bonjour ${personneASaluer}"
+
+      - name: L'heure de salutation # Seconde tâche
+        run: echo "L'heure était $(date)."
