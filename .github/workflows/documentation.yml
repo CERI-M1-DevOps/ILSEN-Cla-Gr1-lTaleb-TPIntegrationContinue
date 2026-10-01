@@ -4,10 +4,11 @@ on:
   pull_request:
     types: [closed]
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   deploy-doc:
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +22,7 @@ jobs:
           distribution: 'corretto'
 
       - name: Generate Javadoc
-        run: mvn -B javadoc:javadoc
+        run: mvn -B compile javadoc:javadoc
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
