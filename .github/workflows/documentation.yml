@@ -21,11 +21,11 @@ jobs:
           java-version: '21'
           distribution: 'corretto'
 
-      - name: Generate Javadoc
-        run: mvn -B compile javadoc:javadoc
+      - name: Generate Javadoc with Plugin
+        run: mvn -B org.apache.maven.plugins:maven-javadoc-plugin:3.6.3:javadoc
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./target/apidocs
+          publish_dir: ./target/site/apidocs
